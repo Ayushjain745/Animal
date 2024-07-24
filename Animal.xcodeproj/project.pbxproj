@@ -24,6 +24,7 @@
 		7564B5F12C50E4D800D22A42 /* AnimalPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5F02C50E4D800D22A42 /* AnimalPictureCell.swift */; };
 		7564B5F32C50FDAE00D22A42 /* FavoriteImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5F22C50FDAE00D22A42 /* FavoriteImageCell.swift */; };
 		7564B5F52C51006100D22A42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7564B5F42C51006100D22A42 /* Main.storyboard */; };
+		7564B5F72C513AC900D22A42 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7564B5F62C513ABC00D22A42 /* Debug.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		7564B5F02C50E4D800D22A42 /* AnimalPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPictureCell.swift; sourceTree = "<group>"; };
 		7564B5F22C50FDAE00D22A42 /* FavoriteImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImageCell.swift; sourceTree = "<group>"; };
 		7564B5F42C51006100D22A42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7564B5F62C513ABC00D22A42 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				7564B5DC2C50D0D200D22A42 /* ViewModels */,
 				7564B5D62C50D06C00D22A42 /* DataServices */,
 				7564B5A32C50CF3400D22A42 /* AppDelegate.swift */,
+				7564B5F62C513ABC00D22A42 /* Debug.xcconfig */,
 				7564B5AF2C50CF3700D22A42 /* Assets.xcassets */,
 				7564B5F42C51006100D22A42 /* Main.storyboard */,
 				7564B5B12C50CF3700D22A42 /* LaunchScreen.storyboard */,
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7564B5F72C513AC900D22A42 /* Debug.xcconfig in Resources */,
 				7564B5F52C51006100D22A42 /* Main.storyboard in Resources */,
 				7564B5B02C50CF3700D22A42 /* Assets.xcassets in Resources */,
 				7564B5B32C50CF3700D22A42 /* Base in Resources */,
@@ -358,6 +362,7 @@
 /* Begin XCBuildConfiguration section */
 		7564B5CB2C50CF3700D22A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7564B5F62C513ABC00D22A42 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -477,6 +482,7 @@
 		};
 		7564B5CE2C50CF3700D22A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7564B5F62C513ABC00D22A42 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -531,6 +537,7 @@
 		};
 		7564B5D12C50CF3700D22A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7564B5F62C513ABC00D22A42 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -569,6 +576,7 @@
 		};
 		7564B5D42C50CF3700D22A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7564B5F62C513ABC00D22A42 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

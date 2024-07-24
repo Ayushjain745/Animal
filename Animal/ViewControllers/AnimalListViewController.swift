@@ -78,6 +78,11 @@ class AnimalListViewController: UIViewController, UITableViewDelegate, UITableVi
         let animal = viewModel.animals[indexPath.row]
         let picturesVC = AnimalPicturesViewController(viewModel: AnimalPicturesViewModel(), animalName: animal)
         navigationController?.pushViewController(picturesVC, animated: true)
+        
+        // Deselect the row with animation after a short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     // Returns the height for each row in the table view

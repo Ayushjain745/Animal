@@ -1,0 +1,10 @@
+//
+//  Debug.xcconfig
+//  Animal
+//
+//  Created by Ayush Jain on 24/07/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+API_KEY = F0RsC7L6viQO7bzFmZTKs7hwGWhXlwm5TjAozyXUwkTmB8INisxbwjVg
