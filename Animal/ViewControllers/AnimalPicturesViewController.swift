@@ -45,7 +45,7 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(AnimalPictureCell.self, forCellWithReuseIdentifier: "AnimalPictureCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         
@@ -65,10 +65,29 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         viewModel.fetchAnimalPictures(for: animalName)
     }
     
-    @objc private func favoriteButtonTapped(_ sender: UIButton) {
-        guard let cell = sender.superview?.superview as? UICollectionViewCell,
-              let indexPath = collectionView.indexPath(for: cell) else { return }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.pictures.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnimalPictureCell", for: indexPath) as! AnimalPictureCell
+        let urlString = viewModel.pictures[indexPath.row]
         
+        // Configure image view
+        if let url = URL(string: urlString) {
+            loadImage(from: url, into: cell.imageView)
+        }
+        
+        // Configure favorite button
+        cell.favoriteButton.setTitle(viewModel.isFavorite(urlString) ? "❤️" : "♡", for: .normal)
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
+        
+        return cell
+    }
+    
+    @objc private func favoriteButtonTapped(_ sender: UIButton) {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
         let urlString = viewModel.pictures[indexPath.row]
         viewModel.toggleFavoriteStatus(for: urlString) { [weak self] success in
             if success {
@@ -79,65 +98,16 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.pictures.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        // Remove any existing subviews to avoid duplication
-        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        
-        let urlString = viewModel.pictures[indexPath.row]
-        
-        // Configure image view
-        let imageView = UIImageView(frame: cell.contentView.bounds)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        cell.contentView.addSubview(imageView)
-        
-        if let url = URL(string: urlString) {
-            loadImage(from: url, into: cell)
-        }
-        
-        // Add favorite button above the image
-        let favoriteButton = UIButton(type: .system)
-        favoriteButton.setTitle(viewModel.isFavorite(urlString) ? "❤️" : "♡", for: .normal)
-        favoriteButton.frame = CGRect(x: cell.contentView.bounds.width - 40, y: 0, width: 40, height: 40)
-        favoriteButton.backgroundColor = UIColor(white: 1, alpha: 0.7) // Add background for better visibility
-        favoriteButton.layer.cornerRadius = 20
-        favoriteButton.clipsToBounds = true
-        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
-        favoriteButton.tag = indexPath.row // Tag button to identify the cell
-        cell.contentView.addSubview(favoriteButton)
-        
-        // Bring favorite button to front
-        cell.contentView.bringSubviewToFront(favoriteButton)
-        
-        return cell
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let urlString = viewModel.pictures[indexPath.row]
-        CoreDataManager.shared.addFavoriteImage(url: urlString, animalName: animalName)
-    }
-    
-    private func loadImage(from url: URL, into cell: UICollectionViewCell) {
+    private func loadImage(from url: URL, into imageView: UIImageView) {
         if let cachedImage = ImageCache.shared.image(forKey: url.absoluteString) {
-            let imageView = UIImageView(image: cachedImage)
-            imageView.frame = cell.contentView.frame
-            cell.contentView.addSubview(imageView)
+            imageView.image = cachedImage
         } else {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
                 if let image = UIImage(data: data) {
                     ImageCache.shared.setImage(image, forKey: url.absoluteString)
                     DispatchQueue.main.async {
-                        let imageView = UIImageView(image: image)
-                        imageView.frame = cell.contentView.frame
-                        cell.contentView.addSubview(imageView)
+                        imageView.image = image
                     }
                 }
             }

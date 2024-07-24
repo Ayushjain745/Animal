@@ -26,6 +26,7 @@
 		7564B5E72C50D15F00D22A42 /* AnimalPicturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */; };
 		7564B5E92C50D17500D22A42 /* FavoriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */; };
 		7564B5EB2C50D20400D22A42 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5EA2C50D20400D22A42 /* CoreDataManager.swift */; };
+		7564B5F12C50E4D800D22A42 /* AnimalPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5F02C50E4D800D22A42 /* AnimalPictureCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPicturesViewController.swift; sourceTree = "<group>"; };
 		7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewController.swift; sourceTree = "<group>"; };
 		7564B5EA2C50D20400D22A42 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7564B5F02C50E4D800D22A42 /* AnimalPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPictureCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				7564B5E42C50D14900D22A42 /* AnimalListViewController.swift */,
 				7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */,
 				7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */,
+				7564B5F02C50E4D800D22A42 /* AnimalPictureCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				7564B5EB2C50D20400D22A42 /* CoreDataManager.swift in Sources */,
 				7564B5D82C50D07F00D22A42 /* AnimalService.swift in Sources */,
 				7564B5A42C50CF3400D22A42 /* AppDelegate.swift in Sources */,
+				7564B5F12C50E4D800D22A42 /* AnimalPictureCell.swift in Sources */,
 				7564B5E02C50D0FF00D22A42 /* AnimalPicturesViewModel.swift in Sources */,
 				7564B5DE2C50D0E700D22A42 /* AnimalListViewModel.swift in Sources */,
 				7564B5A62C50CF3400D22A42 /* SceneDelegate.swift in Sources */,
