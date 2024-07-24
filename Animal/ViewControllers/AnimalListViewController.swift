@@ -16,6 +16,7 @@ class AnimalListViewController: UIViewController, UITableViewDelegate, UITableVi
         setupTableView()
         setupFavoritesButton()
         title = "Animals"
+        view.backgroundColor = UIColor.systemBackground
     }
     
     private func setupTableView() {
@@ -23,6 +24,9 @@ class AnimalListViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none // Removes the default separator
+        tableView.backgroundColor = UIColor.systemGroupedBackground
+        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -50,6 +54,17 @@ class AnimalListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = viewModel.animals[indexPath.row]
+        cell.textLabel?.textColor = UIColor.label
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        cell.backgroundColor = UIColor.secondarySystemGroupedBackground
+        cell.layer.cornerRadius = 8
+        cell.clipsToBounds = true
+        
+        // Adding custom separator for cell
+        let separator = UIView(frame: CGRect(x: 15, y: cell.contentView.frame.height - 1, width: cell.contentView.frame.width - 30, height: 1))
+        separator.backgroundColor = UIColor.separator
+        cell.contentView.addSubview(separator)
+        
         return cell
     }
     
@@ -58,5 +73,12 @@ class AnimalListViewController: UIViewController, UITableViewDelegate, UITableVi
         let picturesVC = AnimalPicturesViewController(viewModel: AnimalPicturesViewModel(), animalName: animal)
         navigationController?.pushViewController(picturesVC, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
-

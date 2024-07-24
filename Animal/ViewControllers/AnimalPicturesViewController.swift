@@ -16,10 +16,10 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         self.viewModel = viewModel
         self.animalName = animalName
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 150, height: 150) // Increased image size
+        layout.minimumInteritemSpacing = 15
+        layout.minimumLineSpacing = 15
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,6 +31,7 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "\(animalName) Pictures"
+        view.backgroundColor = UIColor.systemBackground
         setupCollectionView()
         
         // Bind view model updates to UI
@@ -47,6 +48,8 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         collectionView.dataSource = self
         collectionView.register(AnimalPictureCell.self, forCellWithReuseIdentifier: "AnimalPictureCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor.systemBackground
+        
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -73,9 +76,14 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnimalPictureCell", for: indexPath) as! AnimalPictureCell
         let urlString = viewModel.pictures[indexPath.row]
         
-        // Configure image view
+        // Configure image view with loader
+        cell.startLoading()
         if let url = URL(string: urlString) {
-            loadImage(from: url, into: cell.imageView)
+            loadImage(from: url, into: cell.imageView) {
+                cell.stopLoading()
+            }
+        } else {
+            cell.stopLoading()
         }
         
         // Configure favorite button
@@ -98,9 +106,10 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
         }
     }
     
-    private func loadImage(from url: URL, into imageView: UIImageView) {
+    private func loadImage(from url: URL, into imageView: UIImageView, completion: @escaping () -> Void) {
         if let cachedImage = ImageCache.shared.image(forKey: url.absoluteString) {
             imageView.image = cachedImage
+            completion()
         } else {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
@@ -108,6 +117,7 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
                     ImageCache.shared.setImage(image, forKey: url.absoluteString)
                     DispatchQueue.main.async {
                         imageView.image = image
+                        completion()
                     }
                 }
             }

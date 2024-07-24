@@ -10,12 +10,14 @@ import UIKit
 class AnimalPictureCell: UICollectionViewCell {
     let imageView = UIImageView()
     let favoriteButton = UIButton(type: .system)
+    private let loader = UIActivityIndicatorView(style: .medium)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupImageView()
         setupFavoriteButton()
+        setupLoader()
     }
     
     required init?(coder: NSCoder) {
@@ -25,6 +27,7 @@ class AnimalPictureCell: UICollectionViewCell {
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
         
@@ -52,5 +55,23 @@ class AnimalPictureCell: UICollectionViewCell {
         ])
         
         contentView.bringSubviewToFront(favoriteButton)
+    }
+    
+    private func setupLoader() {
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(loader)
+        
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
+    
+    func startLoading() {
+        loader.startAnimating()
+    }
+    
+    func stopLoading() {
+        loader.stopAnimating()
     }
 }
