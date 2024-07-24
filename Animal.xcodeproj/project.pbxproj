@@ -17,6 +17,15 @@
 		7564B5BE2C50CF3700D22A42 /* AnimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5BD2C50CF3700D22A42 /* AnimalTests.swift */; };
 		7564B5C82C50CF3700D22A42 /* AnimalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5C72C50CF3700D22A42 /* AnimalUITests.swift */; };
 		7564B5CA2C50CF3700D22A42 /* AnimalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5C92C50CF3700D22A42 /* AnimalUITestsLaunchTests.swift */; };
+		7564B5D82C50D07F00D22A42 /* AnimalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5D72C50D07F00D22A42 /* AnimalService.swift */; };
+		7564B5DB2C50D0AC00D22A42 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5DA2C50D0AC00D22A42 /* ImageCache.swift */; };
+		7564B5DE2C50D0E700D22A42 /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5DD2C50D0E700D22A42 /* AnimalListViewModel.swift */; };
+		7564B5E02C50D0FF00D22A42 /* AnimalPicturesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5DF2C50D0FF00D22A42 /* AnimalPicturesViewModel.swift */; };
+		7564B5E22C50D12000D22A42 /* FavoriteImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E12C50D12000D22A42 /* FavoriteImagesViewModel.swift */; };
+		7564B5E52C50D14900D22A42 /* AnimalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E42C50D14900D22A42 /* AnimalListViewController.swift */; };
+		7564B5E72C50D15F00D22A42 /* AnimalPicturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */; };
+		7564B5E92C50D17500D22A42 /* FavoriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */; };
+		7564B5EB2C50D20400D22A42 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564B5EA2C50D20400D22A42 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,15 @@
 		7564B5C32C50CF3700D22A42 /* AnimalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7564B5C72C50CF3700D22A42 /* AnimalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalUITests.swift; sourceTree = "<group>"; };
 		7564B5C92C50CF3700D22A42 /* AnimalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7564B5D72C50D07F00D22A42 /* AnimalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalService.swift; sourceTree = "<group>"; };
+		7564B5DA2C50D0AC00D22A42 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		7564B5DD2C50D0E700D22A42 /* AnimalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewModel.swift; sourceTree = "<group>"; };
+		7564B5DF2C50D0FF00D22A42 /* AnimalPicturesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPicturesViewModel.swift; sourceTree = "<group>"; };
+		7564B5E12C50D12000D22A42 /* FavoriteImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewModel.swift; sourceTree = "<group>"; };
+		7564B5E42C50D14900D22A42 /* AnimalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewController.swift; sourceTree = "<group>"; };
+		7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPicturesViewController.swift; sourceTree = "<group>"; };
+		7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewController.swift; sourceTree = "<group>"; };
+		7564B5EA2C50D20400D22A42 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +119,9 @@
 		7564B5A22C50CF3400D22A42 /* Animal */ = {
 			isa = PBXGroup;
 			children = (
+				7564B5E32C50D12C00D22A42 /* ViewControllers */,
+				7564B5DC2C50D0D200D22A42 /* ViewModels */,
+				7564B5D62C50D06C00D22A42 /* DataServices */,
 				7564B5A32C50CF3400D22A42 /* AppDelegate.swift */,
 				7564B5A52C50CF3400D22A42 /* SceneDelegate.swift */,
 				7564B5A72C50CF3400D22A42 /* ViewController.swift */,
@@ -128,6 +149,36 @@
 				7564B5C92C50CF3700D22A42 /* AnimalUITestsLaunchTests.swift */,
 			);
 			path = AnimalUITests;
+			sourceTree = "<group>";
+		};
+		7564B5D62C50D06C00D22A42 /* DataServices */ = {
+			isa = PBXGroup;
+			children = (
+				7564B5D72C50D07F00D22A42 /* AnimalService.swift */,
+				7564B5DA2C50D0AC00D22A42 /* ImageCache.swift */,
+				7564B5EA2C50D20400D22A42 /* CoreDataManager.swift */,
+			);
+			path = DataServices;
+			sourceTree = "<group>";
+		};
+		7564B5DC2C50D0D200D22A42 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7564B5DD2C50D0E700D22A42 /* AnimalListViewModel.swift */,
+				7564B5DF2C50D0FF00D22A42 /* AnimalPicturesViewModel.swift */,
+				7564B5E12C50D12000D22A42 /* FavoriteImagesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7564B5E32C50D12C00D22A42 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7564B5E42C50D14900D22A42 /* AnimalListViewController.swift */,
+				7564B5E62C50D15F00D22A42 /* AnimalPicturesViewController.swift */,
+				7564B5E82C50D17500D22A42 /* FavoriteImagesViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +312,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7564B5DB2C50D0AC00D22A42 /* ImageCache.swift in Sources */,
+				7564B5E22C50D12000D22A42 /* FavoriteImagesViewModel.swift in Sources */,
+				7564B5E52C50D14900D22A42 /* AnimalListViewController.swift in Sources */,
+				7564B5E72C50D15F00D22A42 /* AnimalPicturesViewController.swift in Sources */,
 				7564B5A82C50CF3400D22A42 /* ViewController.swift in Sources */,
 				7564B5AE2C50CF3500D22A42 /* Animal.xcdatamodeld in Sources */,
+				7564B5E92C50D17500D22A42 /* FavoriteImagesViewController.swift in Sources */,
+				7564B5EB2C50D20400D22A42 /* CoreDataManager.swift in Sources */,
+				7564B5D82C50D07F00D22A42 /* AnimalService.swift in Sources */,
 				7564B5A42C50CF3400D22A42 /* AppDelegate.swift in Sources */,
+				7564B5E02C50D0FF00D22A42 /* AnimalPicturesViewModel.swift in Sources */,
+				7564B5DE2C50D0E700D22A42 /* AnimalListViewModel.swift in Sources */,
 				7564B5A62C50CF3400D22A42 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -429,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
