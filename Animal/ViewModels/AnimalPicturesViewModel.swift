@@ -25,6 +25,7 @@ class AnimalPicturesViewModel {
         self.animalService = animalService
     }
     
+    // Fetches pictures for the specified animal, starting at the current page
     func fetchAnimalPictures(for animal: String) {
         guard !isLoading else { return }
         isLoading = true
@@ -33,8 +34,13 @@ class AnimalPicturesViewModel {
             switch result {
             case .success(let newPictures):
                 DispatchQueue.main.async {
-                    self?.pictures = newPictures
+                    if self?.currentPage == 1 {
+                        self?.pictures = newPictures
+                    } else {
+                        self?.pictures.append(contentsOf: newPictures)
+                    }
                     self?.isLoading = false
+                    self?.onPicturesUpdate?()
                 }
             case .failure:
                 DispatchQueue.main.async {
@@ -44,20 +50,22 @@ class AnimalPicturesViewModel {
         }
     }
     
+    // Loads more pictures for the current animal by incrementing the page number
     func loadMorePictures() {
         guard let animal = animalName, !isLoading else { return }
         currentPage += 1
         fetchAnimalPictures(for: animal)
     }
     
+    // Toggles the favorite status for a given picture URL
     func toggleFavoriteStatus(for url: String, animalName: String, completion: @escaping (Bool) -> Void) {
         CoreDataManager.shared.toggleFavoriteStatus(for: url, animalName: animalName) { success in
             completion(success)
         }
     }
     
+    // Checks if a given picture URL is marked as favorite
     func isFavorite(_ url: String) -> Bool {
         return CoreDataManager.shared.isFavorite(url)
     }
 }
-

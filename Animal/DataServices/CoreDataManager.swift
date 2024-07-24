@@ -10,6 +10,7 @@ import CoreData
 class CoreDataManager {
     static let shared = CoreDataManager()
     
+    // Lazy-loaded persistent container for Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Animal")
         container.loadPersistentStores { description, error in
@@ -20,10 +21,12 @@ class CoreDataManager {
         return container
     }()
     
+    // Managed object context for Core Data operations
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
+    // Saves changes to the context
     func saveContext() {
         if context.hasChanges {
             do {
@@ -35,6 +38,7 @@ class CoreDataManager {
         }
     }
     
+    // Adds a new favorite image to Core Data
     func addFavoriteImage(url: String, animalName: String) {
         let favoriteImage = FavoriteImage(context: context)
         favoriteImage.url = url
@@ -42,17 +46,19 @@ class CoreDataManager {
         saveContext()
     }
     
+    // Fetches all favorite images from Core Data
     func fetchFavoriteImages() -> [FavoriteImage] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<FavoriteImage> = FavoriteImage.fetchRequest()
         do {
-            return try context.fetch(fetchRequest)
+            return try context.fetch(fetchRequest) // Fetch results from Core Data
         } catch {
             print("Failed to fetch favorite images: \(error)")
             return []
         }
     }
     
+    // Toggles the favorite status of an image
     func toggleFavoriteStatus(for url: String, animalName: String, completion: @escaping (Bool) -> Void) {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<FavoriteImage> = FavoriteImage.fetchRequest()
@@ -64,7 +70,7 @@ class CoreDataManager {
                 // Toggle the favorite status
                 existingImage.isFavorite.toggle()
             } else {
-                // Add new favorite image
+                // Add new favorite image if it does not exist
                 let newImage = FavoriteImage(context: context)
                 newImage.url = url
                 newImage.animalName = animalName
@@ -78,6 +84,7 @@ class CoreDataManager {
         }
     }
     
+    // Checks if an image is marked as favorite
     func isFavorite(_ url: String) -> Bool {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<FavoriteImage> = FavoriteImage.fetchRequest()

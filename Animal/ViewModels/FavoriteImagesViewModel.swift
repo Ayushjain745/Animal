@@ -14,12 +14,14 @@ class FavoriteImagesViewModel {
     var filteredImages = [FavoriteImage]()
     var onImagesUpdate: (() -> Void)?
     
+    // Fetches favorite images from Core Data and updates the filteredImages
     func fetchFavoriteImages() {
         favoriteImages = coreDataManager.fetchFavoriteImages()
         filteredImages = favoriteImages
         onImagesUpdate?()
     }
     
+    // Filters the favorite images based on the specified animal name
     func filterImages(by animal: String) {
         if animal == "All" {
             filteredImages = favoriteImages

@@ -13,10 +13,10 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
     
     init() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 150, height: 150) // Increased image size
+        layout.minimumInteritemSpacing = 15
+        layout.minimumLineSpacing = 15
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,6 +28,7 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Favorite Pictures"
+        view.backgroundColor = UIColor.systemBackground
         setupCollectionView()
         setupFilterButton()
         viewModel.onImagesUpdate = { [weak self] in
@@ -36,11 +37,13 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
         viewModel.fetchFavoriteImages()
     }
     
+    // Sets up the collection view's appearance and layout constraints
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(FavoriteImageCell.self, forCellWithReuseIdentifier: "FavoriteImageCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor.systemBackground
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -51,14 +54,16 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
         ])
     }
     
+    // Sets up the filter button in the navigation bar
     private func setupFilterButton() {
         let filterButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterButtonTapped))
         navigationItem.rightBarButtonItem = filterButton
     }
     
+    // Displays an action sheet for filtering images by animal type
     @objc private func filterButtonTapped() {
         let alert = UIAlertController(title: "Filter by Animal", message: nil, preferredStyle: .actionSheet)
-        let animals = ["All", "Elephant", "Lion", "Fox", "Dog", "Shark", "Turtle", "Whale", "Penguin"]
+        let animals = ["All", "Elephant", "Lion", "Fox", "Dog", "Shark", "Turtle", "Whale", "Penguin"].sorted()
         animals.forEach { animal in
             alert.addAction(UIAlertAction(title: animal, style: .default, handler: { [weak self] _ in
                 self?.viewModel.filterImages(by: animal)
@@ -68,33 +73,42 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
         present(alert, animated: true, completion: nil)
     }
     
+    // Returns the number of items in the collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.filteredImages.count
     }
     
+    // Configures each cell in the collection view
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteImageCell", for: indexPath) as! FavoriteImageCell
         let favoriteImage = viewModel.filteredImages[indexPath.row]
+        
+        // Start loading indicator
+        cell.startLoading()
         if let url = URL(string: favoriteImage.url ?? "") {
-            loadImage(from: url, into: cell)
+            loadImage(from: url, into: cell.imageView) {
+                cell.stopLoading()
+            }
+        } else {
+            cell.stopLoading()
         }
+        
         return cell
     }
     
-    private func loadImage(from url: URL, into cell: UICollectionViewCell) {
+    // Loads an image from a URL into the specified image view
+    private func loadImage(from url: URL, into imageView: UIImageView, completion: @escaping () -> Void) {
         if let cachedImage = ImageCache.shared.image(forKey: url.absoluteString) {
-            let imageView = UIImageView(image: cachedImage)
-            imageView.frame = cell.contentView.frame
-            cell.contentView.addSubview(imageView)
+            imageView.image = cachedImage
+            completion()
         } else {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
                 if let image = UIImage(data: data) {
                     ImageCache.shared.setImage(image, forKey: url.absoluteString)
                     DispatchQueue.main.async {
-                        let imageView = UIImageView(image: image)
-                        imageView.frame = cell.contentView.frame
-                        cell.contentView.addSubview(imageView)
+                        imageView.image = image
+                        completion()
                     }
                 }
             }
@@ -102,4 +116,3 @@ class FavoriteImagesViewController: UIViewController, UICollectionViewDelegate, 
         }
     }
 }
-
