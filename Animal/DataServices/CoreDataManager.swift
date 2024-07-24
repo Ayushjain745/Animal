@@ -53,7 +53,7 @@ class CoreDataManager {
         }
     }
     
-    func toggleFavoriteStatus(for url: String, completion: @escaping (Bool) -> Void) {
+    func toggleFavoriteStatus(for url: String, animalName: String, completion: @escaping (Bool) -> Void) {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<FavoriteImage> = FavoriteImage.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "url == %@", url)
@@ -67,6 +67,7 @@ class CoreDataManager {
                 // Add new favorite image
                 let newImage = FavoriteImage(context: context)
                 newImage.url = url
+                newImage.animalName = animalName
                 newImage.isFavorite = true
             }
             try context.save()

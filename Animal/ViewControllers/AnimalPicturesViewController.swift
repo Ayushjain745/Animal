@@ -89,7 +89,7 @@ class AnimalPicturesViewController: UIViewController, UICollectionViewDelegate, 
     @objc private func favoriteButtonTapped(_ sender: UIButton) {
         let indexPath = IndexPath(row: sender.tag, section: 0)
         let urlString = viewModel.pictures[indexPath.row]
-        viewModel.toggleFavoriteStatus(for: urlString) { [weak self] success in
+        viewModel.toggleFavoriteStatus(for: urlString, animalName: animalName) { [weak self] success in
             if success {
                 DispatchQueue.main.async {
                     self?.collectionView.reloadItems(at: [indexPath])

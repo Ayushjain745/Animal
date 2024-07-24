@@ -12,7 +12,7 @@ class AnimalService {
     
     func fetchPictures(for animal: String, page: Int, completion: @escaping (Result<[String], Error>) -> Void) {
         // Pexels API endpoint for search
-        let urlString = "https://api.pexels.com/v1/search?query=\(animal)&page=\(page)&per_page=10"
+        let urlString = "https://api.pexels.com/v1/search?query=\(animal)&page=\(page)&per_page=15"
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest(url: url)

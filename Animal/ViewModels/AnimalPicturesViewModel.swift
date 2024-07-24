@@ -50,8 +50,8 @@ class AnimalPicturesViewModel {
         fetchAnimalPictures(for: animal)
     }
     
-    func toggleFavoriteStatus(for url: String, completion: @escaping (Bool) -> Void) {
-        CoreDataManager.shared.toggleFavoriteStatus(for: url) { success in
+    func toggleFavoriteStatus(for url: String, animalName: String, completion: @escaping (Bool) -> Void) {
+        CoreDataManager.shared.toggleFavoriteStatus(for: url, animalName: animalName) { success in
             completion(success)
         }
     }
