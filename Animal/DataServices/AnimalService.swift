@@ -7,7 +7,11 @@
 
 import Foundation
 
-class AnimalService {
+protocol AnimalServiceProtocol {
+    func fetchPictures(for animal: String, page: Int, completion: @escaping (Result<[String], Error>) -> Void)
+}
+
+class AnimalService: AnimalServiceProtocol {
     
     // Fetches pictures for a specific animal from the Pexels API
     func fetchPictures(for animal: String, page: Int, completion: @escaping (Result<[String], Error>) -> Void) {

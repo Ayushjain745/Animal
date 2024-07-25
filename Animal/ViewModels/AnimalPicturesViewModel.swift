@@ -8,7 +8,7 @@
 import Foundation
 
 class AnimalPicturesViewModel {
-    private let animalService: AnimalService
+    private let animalService: AnimalServiceProtocol
     private var currentPage = 1
     private var isLoading = false
     private var animalName: String?
@@ -21,7 +21,7 @@ class AnimalPicturesViewModel {
     
     var onPicturesUpdate: (() -> Void)?
     
-    init(animalService: AnimalService = AnimalService()) {
+    init(animalService: AnimalServiceProtocol = AnimalService()) {
         self.animalService = animalService
     }
     
@@ -45,6 +45,7 @@ class AnimalPicturesViewModel {
             case .failure:
                 DispatchQueue.main.async {
                     self?.isLoading = false
+                    self?.onPicturesUpdate?()
                 }
             }
         }
